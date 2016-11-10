@@ -1,0 +1,14 @@
+{
+  "sites": {
+    "docs": {
+      "dest": "docs",
+      "parent": "can-define-backup",
+      "pageConfig": {
+        "page": "docs"
+      },
+      "glob": {
+        "pattern": "{readme.md,src/**/*.{js,md}}"
+      }
+    }
+  }
+}
