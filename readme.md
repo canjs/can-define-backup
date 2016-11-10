@@ -2,18 +2,18 @@
 
 [![Build Status](https://travis-ci.org/canjs/can-define-backup.png?branch=master)](https://travis-ci.org/canjs/can-define-backup)
 
-can.Map.backup is a plugin that provides a dirty bit for properties on an Map,
-and lets you restore the original values of an Map's properties after they are changed.
+can-define.Map.backup is a plugin that provides a dirty bit for properties on an DefineMap,
+and lets you restore the original values of an DefineMap's properties after they are changed.
 
 ## Overview
 
-Here is an example showing how to use `[can.Map.backup.prototype.backup backup]` to save values,
-`[can.Map.backup.prototype.restore restore]` to restore them, and `[can.Map.backup.prototype.isDirty isDirty]`
+Here is an example showing how to use `[can-define.Map.backup.prototype.backup backup]` to save values,
+`[can-define.Map.backup.prototype.restore restore]` to restore them, and `[can-define.Map.backup.prototype.isDirty isDirty]`
 
 to check if the Map has changed:
 
 ```
-var recipe = new can.Map({
+var recipe = new DefineMap({
   title: 'Pancake Mix',
   yields: '3 batches',
   ingredients: [{
@@ -35,7 +35,7 @@ var recipe = new can.Map({
 });
 recipe.backup();
 
-recipe.attr('title', 'Flapjack Mix');
+recipe.title = 'Flapjack Mix';
 recipe.title;     // 'Flapjack Mix'
 recipe.isDirty(); // true
 
