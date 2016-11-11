@@ -1,7 +1,7 @@
 {
   "name": "can-define-backup",
-  "version": "3.0.0",
-  "description": "Backup and restore a Definemap state",
+  "version": "0.0.1",
+  "description": "Backup and restore a DefineMap state",
   "homepage": "https://canjs.com",
   "author": {
     "name": "Bitovi",
