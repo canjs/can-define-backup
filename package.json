@@ -52,7 +52,6 @@
     "can-util": "^3.0.1"
   },
   "devDependencies": {
-    "can-define-define": "^3.0.0-pre.2",
     "can-ssr": "^0.11.6",
     "documentjs": "^0.4.2",
     "donejs-cli": "^0.7.0",
