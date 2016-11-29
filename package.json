@@ -24,16 +24,6 @@
     "develop": "can-serve --static --develop --port 8080"
   },
   "main": "dist/cjs/can-define-backup",
-  "browser": {
-    "transform": [
-      "cssify"
-    ]
-  },
-  "browserify": {
-    "transform": [
-      "cssify"
-    ]
-  },
   "keywords": [
     "canjs"
   ],
@@ -64,7 +54,6 @@
   "devDependencies": {
     "can-define-define": "^3.0.0-pre.2",
     "can-ssr": "^0.11.6",
-    "cssify": "^0.6.0",
     "documentjs": "^0.4.2",
     "donejs-cli": "^0.7.0",
     "generator-donejs": "^0.7.0",
