@@ -1,8 +1,9 @@
 //allows you to backup and restore a map instance
-var compute = require('can-compute');
 var DefineMap = require('can-define/map/map');
 var compare = require('can-set/src/compare');
-var assign = require("can-util/js/assign/assign");
+var assign = require("can-assign");
+var canReflect = require("can-reflect");
+var SimpleObservable = require('can-simple-observable');
 
 var flatProps = function (a, cur) {
 	var obj = {};
@@ -16,20 +17,28 @@ var flatProps = function (a, cur) {
 	return obj;
 };
 
+var observables = new WeakMap();
 
-// var oldSetup = DefineMap.prototype.init;
+function getBackup(map) {
+	var obs = observables.get(map);
+	if(!obs) {
+		obs = new SimpleObservable();
+		observables.set(map, obs);
+	}
+	return obs;
+}
 
 assign(DefineMap.prototype, {
 
-	_backupStore: compute(),
-
 	backup: function () {
-		this._backupStore(this.serialize());
+		var store = getBackup(this);
+		canReflect.setValue(store, this.serialize());
 		return this;
 	},
 
 	isDirty: function (checkAssociations) {
-		var backupStore = this._backupStore();
+		var store = getBackup(this);
+		var backupStore = canReflect.getValue(store);
 		if(!backupStore){
 			return false;
 		}
@@ -42,7 +51,9 @@ assign(DefineMap.prototype, {
 	},
 
 	restore: function (restoreAssociations) {
-		var props = restoreAssociations ? this._backupStore() : flatProps(this._backupStore(), this);
+		var store = getBackup(this);
+		var curVal = canReflect.getValue(store);
+		var props = restoreAssociations ? curVal : flatProps(curVal, this);
 		if (this.isDirty(restoreAssociations)) {
 			for(var prop in props) {
 				this[prop] = props[prop];
