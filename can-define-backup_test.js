@@ -1,5 +1,6 @@
-var compute = require('can-compute');
 var DefineMap = require('can-define/map/map');
+var Observation = require("can-observation");
+var canReflect = require("can-reflect");
 
 require('can-define-backup');
 require('steal-qunit');
@@ -111,7 +112,7 @@ test('backup removes properties that were added (#607)', function () {
 	ok(map.foo, undefined, 'there is no foo property');
 });
 
-test('isDirty wrapped in a compute should trigger changes #1417', function() {
+test('isDirty wrapped in an observation should trigger changes #1417', function() {
 	expect(2);
 	var recipe = new Recipe({
 		name: 'bread'
@@ -119,14 +120,14 @@ test('isDirty wrapped in a compute should trigger changes #1417', function() {
 
 	recipe.backup();
 
-	var c = compute(function() {
+	var obs = new Observation(function(){
 		return recipe.isDirty();
 	});
 
-	ok(!c(), 'isDirty is false');
+	ok(!obs.get(), 'isDirty is false');
 
-	c.bind('change', function() {
-		ok(c(), 'isDirty is true and a change has occurred');
+	canReflect.onValue(obs, function(){
+		ok(obs.get(), 'isDirty is true and a change has occurred');
 	});
 
 	recipe.name = 'cheese';
