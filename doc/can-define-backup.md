@@ -26,7 +26,7 @@ to check if the Map has changed:
 
 ```js
 var DefineMap = require("can-define/map/map");
-require('can-define-backup');
+var defineBackup = require('can-define-backup');
 
 var recipe = new DefineMap({
   title: 'Pancake Mix',
@@ -48,6 +48,9 @@ var recipe = new DefineMap({
     quantity: '2 tablespoons'
   }]
 });
+
+defineBackup(recipe);
+
 recipe.backup();
 
 recipe.title = 'Flapjack Mix';

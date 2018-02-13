@@ -18,7 +18,7 @@ If the Observe has never been backed up, `isDirty` returns `undefined`.
 
 ```
 var DefineMap = require('can-define/map/map');
-require('can-define-backup')
+var defineBackup = require('can-define-backup');
 
 var recipe = new DefineMap("Recipe", {
 title: 'Pancake Mix',
@@ -40,7 +40,7 @@ ingredients: [{
  quantity: '2 tablespoons'
 }]
 });
-
+defineBackup(recipe);
 recipe.isDirty();     // false
 recipe.backup();
 
