@@ -1,8 +1,9 @@
 var DefineMap = require('can-define/map/map');
 var Observation = require('can-observation');
 var canReflect = require('can-reflect');
-defineBackup(DefineMap);
 var defineBackup = require('can-define-backup');
+defineBackup(DefineMap);
+
 require('steal-qunit');
 
 var Recipe;
@@ -19,7 +20,6 @@ test('backing up', function () {
   var recipe = new Recipe({
     name: 'cheese'
   });
-  defineBackup(recipe);
   ok(!recipe.isDirty(), 'not backedup, but clean');
   recipe.backup();
   ok(!recipe.isDirty(), 'backedup, but clean');
