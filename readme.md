@@ -34,6 +34,7 @@ var recipe = new DefineMap({
     quantity: '2 tablespoons'
   }]
 });
+defineBackup(recipe);
 recipe.backup();
 
 recipe.title = 'Flapjack Mix';
@@ -51,7 +52,7 @@ recipe.title;     // 'Pancake Mix'
 With StealJS, you can import this module directly in a template that is autorendered:
 
 ```js
-import plugin from 'can-define-backup';
+import defineBackup from 'can-define-backup';
 ```
 
 ### CommonJS use
@@ -60,7 +61,7 @@ Use `require` to load `can-define-backup` and everything else
 needed to create a template that uses `can-define-backup`:
 
 ```js
-var plugin = require("can-define-backup");
+var defineBackup = require("can-define-backup");
 ```
 
 ### AMD use
