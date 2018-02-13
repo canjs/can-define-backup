@@ -48,9 +48,9 @@ recipe.title = 'Flapjack Mix';
 recipe.restore();
 recipe.title; // 'Pancake Mix'
 
-recipe.ingredients.0.quantity = '7 cups';
+recipe.ingredients[0].quantity = '7 cups';
 recipe.restore();
-recipe.ingredients.0.quantity; // '7 cups'
+recipe.ingredients[0].quantity; // '7 cups'
 recipe.restore(true);
-recipe.ingredients.0.quantity; // '6 cups'
+recipe.ingredients[0].quantity; // '6 cups'
 ```
