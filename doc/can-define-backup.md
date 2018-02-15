@@ -25,32 +25,32 @@ Here is an example showing how to use [can-define-backup/can-define.prototype.ba
 to check if the Map has changed:
 
 ```js
-var DefineMap = require("can-define/map/map");
-require('can-define-backup');
+import DefineMap from "can-define/map/map";
+require( "can-define-backup" );
 
-var recipe = new DefineMap({
-  title: 'Pancake Mix',
-  yields: '3 batches',
-  ingredients: [{
-    ingredient: 'flour',
-    quantity: '6 cups'
-  },{
-    ingredient: 'baking soda',
-    quantity: '1 1/2 teaspoons'
-  },{
-    ingredient: 'baking powder',
-    quantity: '3 teaspoons'
-  },{
-    ingredient: 'salt',
-    quantity: '1 tablespoon'
-  },{
-    ingredient: 'sugar',
-    quantity: '2 tablespoons'
-  }]
-});
+const recipe = new DefineMap( {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
 recipe.backup();
 
-recipe.title = 'Flapjack Mix';
+recipe.title = "Flapjack Mix";
 recipe.title;     // 'Flapjack Mix'
 recipe.isDirty(); // true
 

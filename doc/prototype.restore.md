@@ -18,39 +18,39 @@ will re-add properties that have been removed.
 @body
 
 ```js
-var DefineMap = require('can-define/map/map');
-require('can-define-backup')
+import DefineMap from "can-define/map/map";
+require( "can-define-backup" );
 
-var recipe = new DefineMap("Recipe", {
-title: 'Pancake Mix',
-yields: '3 batches',
-ingredients: [{
- ingredient: 'flour',
- quantity: '6 cups'
-},{
- ingredient: 'baking soda',
- quantity: '1 1/2 teaspoons'
-},{
- ingredient: 'baking powder',
- quantity: '3 teaspoons'
-},{
- ingredient: 'salt',
- quantity: '1 tablespoon'
-},{
- ingredient: 'sugar',
- quantity: '2 tablespoons'
-}]
-});
+const recipe = new DefineMap( "Recipe", {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
 
 recipe.backup();
 
-recipe.title = 'Flapjack Mix';
+recipe.title = "Flapjack Mix";
 recipe.restore();
 recipe.title; // 'Pancake Mix'
 
-recipe.ingredients.0.quantity = '7 cups';
+recipe.ingredients[ 0 ].quantity = "7 cups";
 recipe.restore();
-recipe.ingredients.0.quantity; // '7 cups'
-recipe.restore(true);
-recipe.ingredients.0.quantity; // '6 cups'
+recipe.ingredients[ 0 ].quantity; // '7 cups'
+recipe.restore( true );
+recipe.ingredients[ 0 ].quantity; // '6 cups'
 ```
