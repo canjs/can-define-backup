@@ -1,8 +1,9 @@
 var DefineMap = require('can-define/map/map');
-var Observation = require("can-observation");
-var canReflect = require("can-reflect");
+var Observation = require('can-observation');
+var canReflect = require('can-reflect');
+var defineBackup = require('can-define-backup');
+defineBackup(DefineMap);
 
-require('can-define-backup');
 require('steal-qunit');
 
 var Recipe;
@@ -22,7 +23,7 @@ test('backing up', function () {
 	ok(!recipe.isDirty(), 'not backedup, but clean');
 	recipe.backup();
 	ok(!recipe.isDirty(), 'backedup, but clean');
-	recipe.name = "blah";
+	recipe.name = 'blah';
 	ok(recipe.isDirty(), 'dirty');
 	recipe.restore();
 	ok(!recipe.isDirty(), 'restored, clean');
@@ -31,10 +32,10 @@ test('backing up', function () {
 
 test('backup / restore with associations', function () {
 	var Instruction = DefineMap.extend('Instruction', {
-		description: "string"
+		description: 'string'
 	});
 	var Cookbook = DefineMap.extend('Cookbook', {
-		title: "string"
+		title: 'string'
 	});
 	var Recipe = DefineMap.extend('Recipe', {
 		instructions: {
@@ -60,7 +61,7 @@ test('backup / restore with associations', function () {
 	recipe.backup();
 	ok(!recipe.isDirty(), 'backedup, but clean');
 	//recipe.attr('name', 'blah');
-	recipe.name = "blah";
+	recipe.name = 'blah';
 	ok(recipe.isDirty(), 'dirty');
 	recipe.restore();
 	ok(!recipe.isDirty(), 'restored, clean');

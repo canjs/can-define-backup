@@ -1,8 +1,7 @@
 //allows you to backup and restore a map instance
-var DefineMap = require('can-define/map/map');
 var compare = require('can-set/src/compare');
-var assign = require("can-assign");
-var canReflect = require("can-reflect");
+var assign = require('can-assign');
+var canReflect = require('can-reflect');
 var SimpleObservable = require('can-simple-observable');
 
 var flatProps = function (a, cur) {
@@ -28,38 +27,42 @@ function getBackup(map) {
 	return obs;
 }
 
-assign(DefineMap.prototype, {
+function defineBackup(Map) {
+	assign(Map.prototype, {
 
-	backup: function () {
-		var store = getBackup(this);
-		canReflect.setValue(store, this.serialize());
-		return this;
-	},
+		backup: function () {
+			var store = getBackup(this);
+			canReflect.setValue(store, this.serialize());
+			return this;
+		},
 
-	isDirty: function (checkAssociations) {
-		var store = getBackup(this);
-		var backupStore = canReflect.getValue(store);
-		if(!backupStore){
-			return false;
-		}
-		var currentValue = this.serialize();
-		var aParent, bParent, parentProp;
-		var compares = {};
-		var options = { deep: !! checkAssociations };
-
-		return !compare.equal(currentValue, backupStore, aParent, bParent, parentProp, compares, options);
-	},
-
-	restore: function (restoreAssociations) {
-		var store = getBackup(this);
-		var curVal = canReflect.getValue(store);
-		var props = restoreAssociations ? curVal : flatProps(curVal, this);
-		if (this.isDirty(restoreAssociations)) {
-			for(var prop in props) {
-				this[prop] = props[prop];
+		isDirty: function (checkAssociations) {
+			var store = getBackup(this);
+			var backupStore = canReflect.getValue(store);
+			if(!backupStore){
+				return false;
 			}
+			var currentValue = this.serialize();
+			var aParent, bParent, parentProp;
+			var compares = {};
+			var options = { deep: !! checkAssociations };
+
+			return !compare.equal(currentValue, backupStore, aParent, bParent, parentProp, compares, options);
+		},
+
+		restore: function (restoreAssociations) {
+			var store = getBackup(this);
+			var curVal = canReflect.getValue(store);
+			var props = restoreAssociations ? curVal : flatProps(curVal, this);
+			if (this.isDirty(restoreAssociations)) {
+				for(var prop in props) {
+					this[prop] = props[prop];
+				}
+			}
+			return this;
 		}
-		return this;
-	}
-});
-module.exports = exports = DefineMap;
+	});
+	return;
+}
+
+module.exports = exports = defineBackup;

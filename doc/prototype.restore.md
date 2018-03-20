@@ -1,5 +1,5 @@
-@function can-define-backup/can-define/map.prototype.restore restore
-@parent can-define-backup/can-define/map.prototype
+@function can-define-backup.restore restore
+@parent can-define-backup.defineMap
 
 @description Restore saved values of an Observe's properties.
 
@@ -19,7 +19,7 @@ will re-add properties that have been removed.
 
 ```js
 import DefineMap from "can-define/map/map";
-require( "can-define-backup" );
+import defineBackup from "can-define-backup";
 
 const recipe = new DefineMap( "Recipe", {
 	title: "Pancake Mix",
@@ -41,16 +41,17 @@ const recipe = new DefineMap( "Recipe", {
 		quantity: "2 tablespoons"
 	} ]
 } );
-
+defineBackup(recipe);
 recipe.backup();
 
 recipe.title = "Flapjack Mix";
 recipe.restore();
-recipe.title; // 'Pancake Mix'
+recipe.title; // "Pancake Mix"
 
 recipe.ingredients[ 0 ].quantity = "7 cups";
 recipe.restore();
-recipe.ingredients[ 0 ].quantity; // '7 cups'
+recipe.ingredients[ 0 ].quantity; // "7 cups"
 recipe.restore( true );
-recipe.ingredients[ 0 ].quantity; // '6 cups'
+recipe.ingredients[ 0 ].quantity; // "6 cups"
 ```
+@highlight 28,32,34

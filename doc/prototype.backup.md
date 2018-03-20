@@ -1,5 +1,5 @@
-@function can-define-backup/can-define/map/map.prototype.backup backup
-@parent can-define-backup/can-define/map/map.prototype
+@function can-define-backup.backup backup
+@parent can-define-backup.defineMap
 
 @description Save the values of the properties of an Map.
 
@@ -15,35 +15,38 @@ values can be restored with [can.Define.map.backup.prototype.restore restore].
 
 ## Example
 
-```
-var DefineMap = require('can-define/map/map');
-require('can-define-backup')
+```js
+import DefineMap from "can-define/map/map";
+import defineBackup from "can-define-backup";
 
-var recipe = new DefineMap("Recipe", {
-title: 'Pancake Mix',
-yields: '3 batches',
-ingredients: [{
- ingredient: 'flour',
- quantity: '6 cups'
-},{
- ingredient: 'baking soda',
- quantity: '1 1/2 teaspoons'
-},{
- ingredient: 'baking powder',
- quantity: '3 teaspoons'
-},{
- ingredient: 'salt',
- quantity: '1 tablespoon'
-},{
- ingredient: 'sugar',
- quantity: '2 tablespoons'
-}]
-});
+const recipe = new DefineMap( "Recipe", {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
+defineBackup(recipe);
+
 recipe.backup();
 
-recipe.title = Flapjack Mix';
-recipe.title;     // 'Flapjack Mix'
+recipe.title = "Flapjack Mix";
+recipe.title;     // "Flapjack Mix"
 
 recipe.restore();
-recipe.title;     // 'Pancake Mix'
+recipe.title;     // "Pancake Mix"
 ```
+@highlight 26

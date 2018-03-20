@@ -46,7 +46,7 @@ var fixture = require('can-fixture');
 var superMap = require('can-connect/can/super-map/');
 var tag = require('can-connect/can/tag/');
 
-require('can-define-backup');
+var defineBackup = require('can-define-backup');
 require('can-define-define');
 
 var store = fixture.store([{
@@ -96,6 +96,8 @@ var Contact = CanMap.extend({
 			"-"+birthday.getDate();
 	}
 });
+
+defineBackup(Contact);
 
 var connection = superMap({
   url: '/contacts',

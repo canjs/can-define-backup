@@ -15,33 +15,34 @@ to check if the Map has changed:
 
 ```
 var recipe = new DefineMap({
-  title: 'Pancake Mix',
-  yields: '3 batches',
-  ingredients: [{
-    ingredient: 'flour',
-    quantity: '6 cups'
-  },{
-    ingredient: 'baking soda',
-    quantity: '1 1/2 teaspoons'
-  },{
-    ingredient: 'baking powder',
-    quantity: '3 teaspoons'
-  },{
-    ingredient: 'salt',
-    quantity: '1 tablespoon'
-  },{
-    ingredient: 'sugar',
-    quantity: '2 tablespoons'
-  }]
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [{
+		ingredient: "flour",
+		quantity: "6 cups"
+	},{
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	},{
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	},{
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	},{
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	}]
 });
+defineBackup(recipe);
 recipe.backup();
 
-recipe.title = 'Flapjack Mix';
-recipe.title;     // 'Flapjack Mix'
+recipe.title = "Flapjack Mix";
+recipe.title;     // "Flapjack Mix"
 recipe.isDirty(); // true
 
 recipe.restore();
-recipe.title;     // 'Pancake Mix'
+recipe.title;     // "Pancake Mix"
 ```
 
 ## Usage
@@ -51,7 +52,7 @@ recipe.title;     // 'Pancake Mix'
 With StealJS, you can import this module directly in a template that is autorendered:
 
 ```js
-import plugin from "can-define-backup";
+import defineBackup from "can-define-backup";
 ```
 
 ### CommonJS use
@@ -60,7 +61,7 @@ Use `require` to load `can-define-backup` and everything else
 needed to create a template that uses `can-define-backup`:
 
 ```js
-import plugin from "can-define-backup";
+var defineBackup = require("can-define-backup");
 ```
 
 ### AMD use
@@ -76,9 +77,9 @@ Configure the `can` and `jquery` paths and the `can-define-backup` package:
 	        "can": "node_modules/canjs/dist/amd/can"
 	    },
 	    packages: [{
-		    	name: 'can-define-backup',
-		    	location: 'node_modules/can-define-backup/dist/amd',
-		    	main: 'lib/can-define-backup'
+			name: "can-define-backup",
+			location: "node_modules/can-define-backup/dist/amd",
+			main: "lib/can-define-backup"
 	    }]
 	});
 	require(["main-amd"], function(){});
@@ -90,7 +91,7 @@ Configure the `can` and `jquery` paths and the `can-define-backup` package:
 Load the `global` version of the plugin:
 
 ```html
-<script src='./node_modules/can-define-backup/dist/global/can-define-backup.js'></script>
+<script src="./node_modules/can-define-backup/dist/global/can-define-backup.js"></script>
 ```
 
 ## Contributing

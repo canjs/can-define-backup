@@ -1,5 +1,5 @@
-@function can-define-backup/can-define/map.prototype.isDirty isDirty
-@parent can-define-backup/can-define/map.prototype
+@function can-define-backup.isDirty isDirty
+@parent can-define-backup.defineMap
 
 @description Check whether an Observe has changed since the last time it was backed up.
 
@@ -13,43 +13,44 @@ If the Observe has never been backed up, `isDirty` returns `undefined`.
 @param {bool} [deep=false] whether to check nested Observes
 @return {bool} Whether the Observe has changed since the last time it was [can.Map.backup.prototype.backup backed up].
 
-
 @body
 
-```
-var DefineMap = require('can-define/map/map');
-require('can-define-backup')
+## Example
 
-var recipe = new DefineMap("Recipe", {
-title: 'Pancake Mix',
-yields: '3 batches',
-ingredients: [{
- ingredient: 'flour',
- quantity: '6 cups'
-},{
- ingredient: 'baking soda',
- quantity: '1 1/2 teaspoons'
-},{
- ingredient: 'baking powder',
- quantity: '3 teaspoons'
-},{
- ingredient: 'salt',
- quantity: '1 tablespoon'
-},{
- ingredient: 'sugar',
- quantity: '2 tablespoons'
-}]
-});
+```js
+import DefineMap from "can-define/map/map";
+import defineBackup from "can-define-backup";
 
+const recipe = new DefineMap( "Recipe", {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
+defineBackup(recipe);
 recipe.isDirty();     // false
 recipe.backup();
 
-recipe.title = Flapjack Mix';
+recipe.title = "Flapjack Mix";
 recipe.isDirty();     // true
 recipe.restore();
 recipe.isDirty();   // false
 
-recipe.ingredients.0.quantity =  '7 cups';
+recipe.ingredients.0.quantity =  "7 cups";
 recipe.isDirty();     // false
 recipe.isDirty(true); // true
 
@@ -57,3 +58,4 @@ recipe.backup();
 recipe.isDirty();     // false
 recipe.isDirty(true); // false
 ```
+@highlight 25,29,31,34,35,38,39
