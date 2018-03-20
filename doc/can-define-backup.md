@@ -4,7 +4,7 @@
 @test src/test/test.html
 @package ../package.json
 
-@signature `require('can-define-backup')`
+@signature `require("can-define-backup")`
 
 Adds a [can-define-backup/can-define/map/map.prototype.backup],
 [can-define-backup/can-define/map/map.prototype.isDirty] and
@@ -25,38 +25,37 @@ Here is an example showing how to use [can-define-backup/can-define.prototype.ba
 to check if the Map has changed:
 
 ```js
-var DefineMap = require("can-define/map/map");
-var defineBackup = require('can-define-backup');
+import DefineMap from "can-define/map/map";
+import defineBackup from "can-define-backup";
+require( "can-define-backup" );
 
-var recipe = new DefineMap({
-  title: 'Pancake Mix',
-  yields: '3 batches',
-  ingredients: [{
-    ingredient: 'flour',
-    quantity: '6 cups'
-  },{
-    ingredient: 'baking soda',
-    quantity: '1 1/2 teaspoons'
-  },{
-    ingredient: 'baking powder',
-    quantity: '3 teaspoons'
-  },{
-    ingredient: 'salt',
-    quantity: '1 tablespoon'
-  },{
-    ingredient: 'sugar',
-    quantity: '2 tablespoons'
-  }]
-});
-
+const recipe = new DefineMap( {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
 defineBackup(recipe);
-
 recipe.backup();
 
-recipe.title = 'Flapjack Mix';
-recipe.title;     // 'Flapjack Mix'
+recipe.title = "Flapjack Mix";
+recipe.title;     // "Flapjack Mix"
 recipe.isDirty(); // true
 
 recipe.restore();
-recipe.title;     // 'Pancake Mix'
+recipe.title;     // "Pancake Mix"
 ```
