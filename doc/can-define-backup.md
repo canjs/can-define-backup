@@ -1,33 +1,26 @@
 @module {can-define} can-define-backup
-@parent can-ecosystem
-@group can-define-backup/can-define.prototype 0 can-define.prototype
+@parent can-observables
+@collection can-ecosystem
+@group can-define-backup.defineMap DefineMap.prototype
 @test src/test/test.html
 @package ../package.json
 
 @signature `require("can-define-backup")`
 
-Adds a [can-define-backup/can-define/map/map.prototype.backup],
-[can-define-backup/can-define/map/map.prototype.isDirty] and
-[can-define-backup/can-define/map/map.prototype.restore] method to [can-define].
+Provides a dirty bit for properties on a Map and lets you restore the original values of properties after they are changed.
 
-@return {can-define} Exports [can-define].
-
+@param {Object} Map The [can-define/map/map] constructor. Adds a [can-define-backup.backup], [can-define-backup.isDirty], and [can-define-backup.restore] method to the prototype of the map.
 @body
 
-`can-define-backup` is a plugin that provides a dirty bit for properties on an Map,
-and lets you restore the original values of an Map's properties after they are changed.
 
 ## Overview
 
-Here is an example showing how to use [can-define-backup/can-define.prototype.backup] to save values,
-`[can-define-backup/can-define/map/map.prototype.restore restore]` to restore them, and `[can-define-backup/can-define/map/map.prototype.isDirty isDirty]`
-
-to check if the Map has changed:
+Here is an example showing how to use [can-define-backup.backup] to save values,
+[can-define-backup.restore restore] to restore them, and [can-define-backup.isDirty isDirty] to check if the Map has changed:
 
 ```js
 import DefineMap from "can-define/map/map";
 import defineBackup from "can-define-backup";
-require( "can-define-backup" );
 
 const recipe = new DefineMap( {
 	title: "Pancake Mix",

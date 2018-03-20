@@ -1,5 +1,5 @@
-@function can-define-backup/can-define/map/map.prototype.backup backup
-@parent can-define-backup/can-define/map/map.prototype
+@function can-define-backup.backup backup
+@parent can-define-backup.defineMap
 
 @description Save the values of the properties of an Map.
 
@@ -15,7 +15,7 @@ values can be restored with [can.Define.map.backup.prototype.restore restore].
 
 ## Example
 
-```
+```js
 import DefineMap from "can-define/map/map";
 import defineBackup from "can-define-backup";
 
@@ -49,3 +49,4 @@ recipe.title;     // "Flapjack Mix"
 recipe.restore();
 recipe.title;     // "Pancake Mix"
 ```
+@highlight 26

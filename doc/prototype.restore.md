@@ -1,5 +1,5 @@
-@function can-define-backup/can-define/map.prototype.restore restore
-@parent can-define-backup/can-define/map.prototype
+@function can-define-backup.restore restore
+@parent can-define-backup.defineMap
 
 @description Restore saved values of an Observe's properties.
 
@@ -54,3 +54,4 @@ recipe.ingredients[ 0 ].quantity; // "7 cups"
 recipe.restore( true );
 recipe.ingredients[ 0 ].quantity; // "6 cups"
 ```
+@highlight 28,32,34
