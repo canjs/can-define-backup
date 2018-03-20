@@ -16,37 +16,36 @@ values can be restored with [can.Define.map.backup.prototype.restore restore].
 ## Example
 
 ```
-var DefineMap = require('can-define/map/map');
-var defineBackup = require('can-define-backup');
+import DefineMap from "can-define/map/map";
+import defineBackup from "can-define-backup";
 
-var recipe = new DefineMap("Recipe", {
-title: 'Pancake Mix',
-yields: '3 batches',
-ingredients: [{
- ingredient: 'flour',
- quantity: '6 cups'
-},{
- ingredient: 'baking soda',
- quantity: '1 1/2 teaspoons'
-},{
- ingredient: 'baking powder',
- quantity: '3 teaspoons'
-},{
- ingredient: 'salt',
- quantity: '1 tablespoon'
-},{
- ingredient: 'sugar',
- quantity: '2 tablespoons'
-}]
-});
-
+const recipe = new DefineMap( "Recipe", {
+	title: "Pancake Mix",
+	yields: "3 batches",
+	ingredients: [ {
+		ingredient: "flour",
+		quantity: "6 cups"
+	}, {
+		ingredient: "baking soda",
+		quantity: "1 1/2 teaspoons"
+	}, {
+		ingredient: "baking powder",
+		quantity: "3 teaspoons"
+	}, {
+		ingredient: "salt",
+		quantity: "1 tablespoon"
+	}, {
+		ingredient: "sugar",
+		quantity: "2 tablespoons"
+	} ]
+} );
 defineBackup(recipe);
 
 recipe.backup();
 
-recipe.title = Flapjack Mix';
-recipe.title;     // 'Flapjack Mix'
+recipe.title = "Flapjack Mix";
+recipe.title;     // "Flapjack Mix"
 
 recipe.restore();
-recipe.title;     // 'Pancake Mix'
+recipe.title;     // "Pancake Mix"
 ```
