@@ -46,7 +46,7 @@ function defineBackup(Map) {
 			var currentValue = this.serialize();
 			var patches;
 			if(!! checkAssociations) {
-				patches = diffDeep(currentValue, backupStore)
+				patches = diffDeep(currentValue, backupStore);
 			} else {
 				patches = diffMap(currentValue, backupStore).filter(function(patch){
 					// only keep those that are not a set of deep object
@@ -57,7 +57,7 @@ function defineBackup(Map) {
 						var curVal = currentValue[patch.key],
 							backupVal = backupStore[patch.key];
 						var twoObjectsCompared = curVal && backupVal && typeof curVal === "object" && typeof backupVal === "object";
-						return !twoObjectsCompared
+						return !twoObjectsCompared;
 					}
 				});
 			}
