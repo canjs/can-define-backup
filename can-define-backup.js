@@ -1,8 +1,9 @@
 //allows you to backup and restore a map instance
-var compare = require('can-set/src/compare');
 var assign = require('can-assign');
 var canReflect = require('can-reflect');
 var SimpleObservable = require('can-simple-observable');
+var diffDeep = require("can-diff/deep/deep");
+var diffMap = require("can-diff/map/map");
 
 var flatProps = function (a, cur) {
 	var obj = {};
@@ -43,11 +44,24 @@ function defineBackup(Map) {
 				return false;
 			}
 			var currentValue = this.serialize();
-			var aParent, bParent, parentProp;
-			var compares = {};
-			var options = { deep: !! checkAssociations };
-
-			return !compare.equal(currentValue, backupStore, aParent, bParent, parentProp, compares, options);
+			var patches;
+			if(!! checkAssociations) {
+				patches = diffDeep(currentValue, backupStore)
+			} else {
+				patches = diffMap(currentValue, backupStore).filter(function(patch){
+					// only keep those that are not a set of deep object
+					if(patch.type !== "set") {
+						return true;
+					} else {
+						// check values .. if both objects ... we are not dirty ...
+						var curVal = currentValue[patch.key],
+							backupVal = backupStore[patch.key];
+						var twoObjectsCompared = curVal && backupVal && typeof curVal === "object" && typeof backupVal === "object";
+						return !twoObjectsCompared
+					}
+				});
+			}
+			return patches.length;
 		},
 
 		restore: function (restoreAssociations) {
