@@ -1,3 +1,4 @@
+"use strict";
 //allows you to backup and restore a map instance
 var compare = require('can-set/src/compare');
 var assign = require('can-assign');
