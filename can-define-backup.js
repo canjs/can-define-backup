@@ -1,3 +1,4 @@
+"use strict";
 //allows you to backup and restore a map instance
 var assign = require('can-assign');
 var canReflect = require('can-reflect');
