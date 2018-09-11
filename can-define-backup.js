@@ -1,6 +1,5 @@
 "use strict";
 //allows you to backup and restore a map instance
-var assign = require('can-assign');
 var canReflect = require('can-reflect');
 var SimpleObservable = require('can-simple-observable');
 var diffDeep = require("can-diff/deep/deep");
@@ -18,6 +17,17 @@ var flatProps = function (a, cur) {
 	return obj;
 };
 
+var assignNonEnumerable = function(base, props) {
+	for(var prop in props) {
+		Object.defineProperty(base, prop, {
+			enumerable: false,
+			configurable: true,
+			writable: true,
+			value: props[prop]
+		});
+	}
+};
+
 var observables = new WeakMap();
 
 function getBackup(map) {
@@ -30,7 +40,7 @@ function getBackup(map) {
 }
 
 function defineBackup(Map) {
-	assign(Map.prototype, {
+	assignNonEnumerable(Map.prototype, {
 
 		backup: function () {
 			var store = getBackup(this);
@@ -77,7 +87,8 @@ function defineBackup(Map) {
 			return this;
 		}
 	});
-	return;
+
+	return Map;
 }
 
 module.exports = exports = defineBackup;

@@ -2,7 +2,8 @@ var DefineMap = require('can-define/map/map');
 var Observation = require('can-observation');
 var canReflect = require('can-reflect');
 var defineBackup = require('can-define-backup');
-defineBackup(DefineMap);
+
+var MyMap = defineBackup(DefineMap.extend({}));
 
 require('steal-qunit');
 
@@ -10,7 +11,7 @@ var Recipe;
 
 QUnit.module('can/define/backup', {
 	setup: function () {
-		Recipe = DefineMap.extend('Recipe', {
+		Recipe = MyMap.extend('Recipe', {
 			name: 'string'
 		});
 	}
@@ -31,13 +32,13 @@ test('backing up', function () {
 });
 
 test('backup / restore with associations', function () {
-	var Instruction = DefineMap.extend('Instruction', {
+	var Instruction = MyMap.extend('Instruction', {
 		description: 'string'
 	});
-	var Cookbook = DefineMap.extend('Cookbook', {
+	var Cookbook = MyMap.extend('Cookbook', {
 		title: 'string'
 	});
-	var Recipe = DefineMap.extend('Recipe', {
+	var Recipe = MyMap.extend('Recipe', {
 		instructions: {
 			Type: Instruction.List
 		},
@@ -85,7 +86,7 @@ test('backup / restore with associations', function () {
 });
 
 test('backup restore nested observables', function () {
-	var observe = new DefineMap({
+	var observe = new MyMap({
 		nested: {
 			test: 'property'
 		}
@@ -103,7 +104,7 @@ test('backup restore nested observables', function () {
 });
 
 test('backup removes properties that were added (#607)', function () {
-	var map = new DefineMap({
+	var map = new MyMap({
 		foo: 'string'
 	});
 	map.backup();
