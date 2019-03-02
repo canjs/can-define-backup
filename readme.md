@@ -1,116 +1,26 @@
 # can-define-backup
 
-
-[![Build Status](https://travis-ci.org/canjs/can-define-backup.png?branch=master)](https://travis-ci.org/canjs/can-define-backup)
+[![Join our Slack](https://img.shields.io/badge/slack-join%20chat-611f69.svg)](https://www.bitovi.com/community/slack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join our Discourse](https://img.shields.io/discourse/https/forums.bitovi.com/posts.svg)](https://forums.bitovi.com/?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/canjs/can-define-backup/blob/master/LICENSE.md)
+[![npm version](https://badge.fury.io/js/can-define-backup.svg)](https://www.npmjs.com/package/can-define-backup)
+[![Travis build status](https://travis-ci.org/canjs/can-define-backup.svg?branch=master)](https://travis-ci.org/canjs/can-define-backup)
+[![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-define-backup.svg)](https://greenkeeper.io/)
 
 can-define.Map.backup is a plugin that provides a dirty bit for properties on an DefineMap,
-and lets you restore the original values of an DefineMap's properties after they are changed.
 
-## Overview
+## Documentation
 
-Here is an example showing how to use `[can-define.Map.backup.prototype.backup backup]` to save values,
-`[can-define.Map.backup.prototype.restore restore]` to restore them, and `[can-define.Map.backup.prototype.isDirty isDirty]`
+Read the [can-define-backup API docs on CanJS.com](https://canjs.com/doc/can-define-backup.html).
 
-to check if the Map has changed:
+## Changelog
 
-```
-var recipe = new DefineMap.extend({
-	title: "Pancake Mix",
-	yields: "3 batches",
-	ingredients: {
-		default: () => [{
-			ingredient: "flour",
-			quantity: "6 cups"
-		},{
-			ingredient: "baking soda",
-			quantity: "1 1/2 teaspoons"
-		},{
-			ingredient: "baking powder",
-			quantity: "3 teaspoons"
-		},{
-			ingredient: "salt",
-			quantity: "1 tablespoon"
-		},{
-			ingredient: "sugar",
-			quantity: "2 tablespoons"
-		}]
-});
-defineBackup(recipe);
-recipe.backup();
-
-recipe.title = "Flapjack Mix";
-recipe.title;     // "Flapjack Mix"
-recipe.isDirty(); // true
-
-recipe.restore();
-recipe.title;     // "Pancake Mix"
-```
-
-## Usage
-
-### ES6 use
-
-With StealJS, you can import this module directly in a template that is autorendered:
-
-```js
-import defineBackup from "can-define-backup";
-```
-
-### CommonJS use
-
-Use `require` to load `can-define-backup` and everything else
-needed to create a template that uses `can-define-backup`:
-
-```js
-var defineBackup = require("can-define-backup");
-```
-
-### AMD use
-
-Configure the `can` and `jquery` paths and the `can-define-backup` package:
-
-```html
-<script src="require.js"></script>
-<script>
-	require.config({
-	    paths: {
-	        "jquery": "node_modules/jquery/dist/jquery",
-	        "can": "node_modules/canjs/dist/amd/can"
-	    },
-	    packages: [{
-			name: "can-define-backup",
-			location: "node_modules/can-define-backup/dist/amd",
-			main: "lib/can-define-backup"
-	    }]
-	});
-	require(["main-amd"], function(){});
-</script>
-```
-
-### Standalone use
-
-Load the `global` version of the plugin:
-
-```html
-<script src="./node_modules/can-define-backup/dist/global/can-define-backup.js"></script>
-```
+See the [latest releases on GitHub](https://github.com/canjs/can-define-backup/releases).
 
 ## Contributing
 
-### Making a Build
+The [contribution guide](https://github.com/canjs/can-define-backup/blob/master/CONTRIBUTING.md) has information on getting help, reporting bugs, developing locally, and more.
 
-To make a build of the distributables into `dist/` in the cloned repository run
+## License
 
-```
-npm install
-node build
-```
-
-### Running the tests
-
-Tests can run in the browser by opening a webserver and visiting the `test.html` page.
-Automated tests that run the tests from the command line in Firefox can be run with
-
-```
-npm test
-```
+[MIT](https://github.com/canjs/can-define-backup/blob/master/LICENSE.md)
