@@ -5,8 +5,6 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/canjs/can-define-backup/blob/master/LICENSE.md)
 [![npm version](https://badge.fury.io/js/can-define-backup.svg)](https://www.npmjs.com/package/can-define-backup)
 [![Travis build status](https://travis-ci.org/canjs/can-define-backup.svg?branch=master)](https://travis-ci.org/canjs/can-define-backup)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/canjs/can-define-backup?branch=master&svg=true)](https://ci.appveyor.com/project/matthewp/can-define-backup)
-[![Coverage status](https://coveralls.io/repos/github/canjs/can-define-backup/badge.svg?branch=master)](https://coveralls.io/github/canjs/can-define-backup?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-define-backup.svg)](https://greenkeeper.io/)
 
 can-define.Map.backup is a plugin that provides a dirty bit for properties on an DefineMap,
