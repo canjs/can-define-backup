@@ -10,7 +10,7 @@ require('steal-qunit');
 var Recipe;
 
 QUnit.module('can/define/backup', {
-	beforeEach: function(assert) {
+	beforeEach: function() {
 		Recipe = MyMap.extend('Recipe', {
 			name: 'string'
 		});
