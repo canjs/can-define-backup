@@ -10,28 +10,28 @@ require('steal-qunit');
 var Recipe;
 
 QUnit.module('can/define/backup', {
-	setup: function () {
+	beforeEach: function() {
 		Recipe = MyMap.extend('Recipe', {
 			name: 'string'
 		});
 	}
 });
 
-test('backing up', function () {
+QUnit.test('backing up', function(assert) {
 	var recipe = new Recipe({
 		name: 'cheese'
 	});
-	ok(!recipe.isDirty(), 'not backedup, but clean');
+	assert.ok(!recipe.isDirty(), 'not backedup, but clean');
 	recipe.backup();
-	ok(!recipe.isDirty(), 'backedup, but clean');
+	assert.ok(!recipe.isDirty(), 'backedup, but clean');
 	recipe.name = 'blah';
-	ok(recipe.isDirty(), 'dirty');
+	assert.ok(recipe.isDirty(), 'dirty');
 	recipe.restore();
-	ok(!recipe.isDirty(), 'restored, clean');
-	equal(recipe.name, 'cheese', 'name back');
+	assert.ok(!recipe.isDirty(), 'restored, clean');
+	assert.equal(recipe.name, 'cheese', 'name back');
 });
 
-test('backup / restore with associations', function () {
+QUnit.test('backup / restore with associations', function(assert) {
 	var Instruction = MyMap.extend('Instruction', {
 		description: 'string'
 	});
@@ -58,64 +58,64 @@ test('backup / restore with associations', function () {
 		}
 	});
 	//test basic is dirty
-	ok(!recipe.isDirty(), 'not backedup, but clean');
+	assert.ok(!recipe.isDirty(), 'not backedup, but clean');
 	recipe.backup();
-	ok(!recipe.isDirty(), 'backedup, but clean');
+	assert.ok(!recipe.isDirty(), 'backedup, but clean');
 	//recipe.attr('name', 'blah');
 	recipe.name = 'blah';
-	ok(recipe.isDirty(), 'dirty');
+	assert.ok(recipe.isDirty(), 'dirty');
 	recipe.restore();
-	ok(!recipe.isDirty(), 'restored, clean');
-	equal(recipe.name, 'cheese burger', 'name back');
+	assert.ok(!recipe.isDirty(), 'restored, clean');
+	assert.equal(recipe.name, 'cheese burger', 'name back');
 	// test belongs too
 
 	//ok(recipe.cookbook.isDirty(), 'cookbook not backedup, but clean');
 	recipe.cookbook.backup();
 	recipe.cookbook.title = 'Brian\'s Burgers';
 	// ok(!recipe.isDirty(), 'recipe itself is clean');
-	ok(recipe.isDirty(true), 'recipe is dirty if checking associations');
+	assert.ok(recipe.isDirty(true), 'recipe is dirty if checking associations');
 	recipe.cookbook.restore();
 	// ok(!recipe.isDirty(true), 'recipe is now clean with checking associations');
-	equal(recipe.cookbook.title, 'Justin\'s Grillin Times', 'cookbook title back');
+	assert.equal(recipe.cookbook.title, 'Justin\'s Grillin Times', 'cookbook title back');
 	//try belongs to recursive restore
 	recipe.cookbook.title = 'Brian\'s Burgers';
 	recipe.restore();
-	ok(recipe.isDirty(true), 'recipe is dirty if checking associations, after a restore');
+	assert.ok(recipe.isDirty(true), 'recipe is dirty if checking associations, after a restore');
 	recipe.restore(true);
 	// ok(!recipe.isDirty(true), 'cleaned all of recipe and its associations');
 });
 
-test('backup restore nested observables', function () {
+QUnit.test('backup restore nested observables', function(assert) {
 	var observe = new MyMap({
 		nested: {
 			test: 'property'
 		}
 	});
-	equal(observe.nested.test, 'property', 'Nested object got converted');
+	assert.equal(observe.nested.test, 'property', 'Nested object got converted');
 	observe.backup();
 
 	observe.nested.test = 'changed property';
 
-	equal(observe.nested.test, 'changed property', 'Nested property changed');
+	assert.equal(observe.nested.test, 'changed property', 'Nested property changed');
 
-	ok(observe.isDirty(true), 'Observe is dirty');
+	assert.ok(observe.isDirty(true), 'Observe is dirty');
 	observe.restore(true);
-	equal(observe.nested.test, 'property', 'Nested object got restored');
+	assert.equal(observe.nested.test, 'property', 'Nested object got restored');
 });
 
-test('backup removes properties that were added (#607)', function () {
+QUnit.test('backup removes properties that were added (#607)', function(assert) {
 	var map = new MyMap({
 		foo: 'string'
 	});
 	map.backup();
 	map.foo = 'bar';
-	ok(map.isDirty(), 'the map with an additional property is dirty');
+	assert.ok(map.isDirty(), 'the map with an additional property is dirty');
 	map.restore();
-	ok(map.foo, undefined, 'there is no foo property');
+	assert.ok(map.foo, undefined, 'there is no foo property');
 });
 
-test('isDirty wrapped in an observation should trigger changes #1417', function() {
-	expect(2);
+QUnit.test('isDirty wrapped in an observation should trigger changes #1417', function(assert) {
+	assert.expect(2);
 	var recipe = new Recipe({
 		name: 'bread'
 	});
@@ -126,10 +126,10 @@ test('isDirty wrapped in an observation should trigger changes #1417', function(
 		return recipe.isDirty();
 	});
 
-	ok(!obs.get(), 'isDirty is false');
+	assert.ok(!obs.get(), 'isDirty is false');
 
 	canReflect.onValue(obs, function(){
-		ok(obs.get(), 'isDirty is true and a change has occurred');
+		assert.ok(obs.get(), 'isDirty is true and a change has occurred');
 	});
 
 	recipe.name = 'cheese';
