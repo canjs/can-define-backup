@@ -35,11 +35,11 @@
   },
   "devDependencies": {
     "can-observation": "^4.0.0",
-    "core-js": "^2.5.7",
+    "core-js": "^3.0.1",
     "jshint": "^2.9.1",
-    "steal": "^1.0.0",
+    "steal": "^2.2.1",
     "steal-qunit": "^2.0.0",
-    "steal-tools": "^1.0.0",
+    "steal-tools": "^2.2.1",
     "testee": "^0.9.0"
   }
 }
